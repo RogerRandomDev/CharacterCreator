@@ -1,0 +1,180 @@
+[gd_scene load_steps=9 format=3 uid="uid://d1pvbr368jo24"]
+
+[ext_resource type="Script" path="res://testing.gd" id="1_ixh1b"]
+[ext_resource type="Script" path="res://addons/CharacterCreator/Character/CharacterModel.gd" id="1_j46ld"]
+[ext_resource type="Script" path="res://addons/CharacterCreator/Character/CharacterResource.gd" id="2_qbjvh"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5itod"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_utlr2"]
+sky_material = SubResource("ProceduralSkyMaterial_5itod")
+
+[sub_resource type="Environment" id="Environment_55xrk"]
+background_mode = 2
+sky = SubResource("Sky_utlr2")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="Resource" id="Resource_0cw24"]
+script = ExtResource("2_qbjvh")
+EyeType = 1
+EyeColor = Color(1, 1, 1, 1)
+EyeGap = 1.0
+EyePosition = 0.0
+EyeRotation = 0.0
+EyeScale = Vector2(2, 2)
+PupilType = 0
+PupilColor = Color(0.423529, 0.945098, 0.835294, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_kn2g5"]
+size = Vector3(1.188, 1.193, 1.661)
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ixh1b")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+custom_minimum_size = Vector2(1152, 648)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+projection = 1
+current = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport"]
+environment = SubResource("Environment_55xrk")
+
+[node name="CharacterModel" type="Node3D" parent="SubViewportContainer/SubViewport"]
+script = ExtResource("1_j46ld")
+characterData = SubResource("Resource_0cw24")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0697341)
+visible = false
+mesh = SubResource("BoxMesh_kn2g5")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(196, 648)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Eye Type"
+
+[node name="HSlider" type="HSlider" parent="VBoxContainer"]
+layout_mode = 2
+max_value = 1.0
+rounded = true
+
+[node name="Label2" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Pupil Type"
+
+[node name="HSlider2" type="HSlider" parent="VBoxContainer"]
+layout_mode = 2
+max_value = 2.0
+rounded = true
+
+[node name="Label3" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Eye Gap"
+
+[node name="HSlider3" type="HSlider" parent="VBoxContainer"]
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+
+[node name="Label9" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Eye Vertical"
+
+[node name="HSlider7" type="HSlider" parent="VBoxContainer"]
+layout_mode = 2
+min_value = -0.375
+max_value = 0.375
+step = 0.025
+value = -0.375
+
+[node name="Label4" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Eye Width"
+
+[node name="HSlider4" type="HSlider" parent="VBoxContainer"]
+layout_mode = 2
+min_value = 0.1
+max_value = 4.0
+step = 0.1
+value = 2.0
+
+[node name="Label5" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Eye Height"
+
+[node name="HSlider5" type="HSlider" parent="VBoxContainer"]
+layout_mode = 2
+min_value = 0.1
+max_value = 4.0
+step = 0.1
+value = 2.0
+
+[node name="Label6" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Eye Rotation"
+
+[node name="HSlider6" type="HSlider" parent="VBoxContainer"]
+layout_mode = 2
+min_value = -3.142
+max_value = 3.142
+step = 0.157
+value = -0.002
+
+[node name="Label7" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Eye Color
+"
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+color = Color(1, 1, 1, 1)
+
+[node name="Label8" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Pupil Color"
+
+[node name="ColorPickerButton2" type="ColorPickerButton" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+color = Color(0.423529, 0.945098, 0.835294, 1)
+
+[connection signal="value_changed" from="VBoxContainer/HSlider" to="." method="_on_h_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/HSlider2" to="." method="_on_h_slider_2_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/HSlider3" to="." method="_on_h_slider_3_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/HSlider7" to="." method="_on_h_slider_7_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/HSlider4" to="." method="_on_h_slider_4_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/HSlider5" to="." method="_on_h_slider_5_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/HSlider6" to="." method="_on_h_slider_6_value_changed"]
+[connection signal="color_changed" from="VBoxContainer/ColorPickerButton" to="." method="_on_color_picker_button_color_changed"]
+[connection signal="color_changed" from="VBoxContainer/ColorPickerButton2" to="." method="_on_color_picker_button_2_color_changed"]
