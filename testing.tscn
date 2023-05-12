@@ -19,9 +19,9 @@ glow_enabled = true
 
 [sub_resource type="Resource" id="Resource_0cw24"]
 script = ExtResource("2_qbjvh")
-EyeType = 1
+EyeType = 0
 EyeColor = Color(1, 1, 1, 1)
-EyeGap = 1.0
+EyeGap = 1.762
 EyePosition = 0.0
 EyeRotation = 0.0
 EyeScale = Vector2(2, 2)
@@ -54,7 +54,6 @@ render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
-projection = 1
 current = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport"]
@@ -69,7 +68,7 @@ transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -
 shadow_enabled = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0697341)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.282246)
 visible = false
 mesh = SubResource("BoxMesh_kn2g5")
 
@@ -103,8 +102,9 @@ text = "Eye Gap"
 
 [node name="HSlider3" type="HSlider" parent="VBoxContainer"]
 layout_mode = 2
-max_value = 1.0
+max_value = 2.0
 step = 0.05
+value = 1.0
 
 [node name="Label9" type="Label" parent="VBoxContainer"]
 layout_mode = 2
@@ -115,7 +115,7 @@ layout_mode = 2
 min_value = -0.375
 max_value = 0.375
 step = 0.025
-value = -0.375
+value = 0.025
 
 [node name="Label4" type="Label" parent="VBoxContainer"]
 layout_mode = 2
@@ -123,7 +123,7 @@ text = "Eye Width"
 
 [node name="HSlider4" type="HSlider" parent="VBoxContainer"]
 layout_mode = 2
-min_value = 0.1
+min_value = 0.5
 max_value = 4.0
 step = 0.1
 value = 2.0
@@ -134,7 +134,7 @@ text = "Eye Height"
 
 [node name="HSlider5" type="HSlider" parent="VBoxContainer"]
 layout_mode = 2
-min_value = 0.1
+min_value = 0.5
 max_value = 4.0
 step = 0.1
 value = 2.0
